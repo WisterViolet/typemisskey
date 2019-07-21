@@ -1,3 +1,3 @@
-module github.com/wisterviolet/typemissley/util
+module util
 
 go 1.12
