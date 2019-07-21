@@ -22,3 +22,15 @@ func LoadJSON(filename string, v interface{}) error {
 	}
 	return nil
 }
+
+// WrapJSONString : 任意の型をjsonの[]byteに変換する関数
+func WrapJSONString(v interface{}) ([]byte, error) {
+	/*
+		v: 任意の型
+	*/
+	body, err := json.Marshal(v)
+	if err != nil {
+		return nil, err
+	}
+	return body, nil
+}
