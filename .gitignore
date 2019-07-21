@@ -13,3 +13,6 @@
 
 # enviroment file
 .env
+
+# Unit Test
+test.go
