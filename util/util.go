@@ -4,6 +4,8 @@ package util
 import (
 	"encoding/json"
 	"io/ioutil"
+	"net/url"
+	"path"
 )
 
 // LoadJSON : .jsonを読み込んで、変数に保存する関数
@@ -33,4 +35,19 @@ func WrapJSONString(v interface{}) ([]byte, error) {
 		return nil, err
 	}
 	return body, nil
+}
+
+// JoinURLPath : baseURLにエンドポイントを加える関数
+func JoinURLPath(base, endpoint string) (string, error) {
+	/*
+		base: ベースになるURL
+		endpoint: エンドポイントへのパス
+	*/
+	baseURL, err := url.Parse(base)
+	if err != nil {
+		return "", err
+	}
+	tmp := path.Join(baseURL.Path, endpoint)
+	baseURL.Path = tmp
+	return baseURL.String(), nil
 }
