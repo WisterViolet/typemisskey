@@ -3,7 +3,9 @@ package util
 
 import (
 	"encoding/json"
+	"io"
 	"io/ioutil"
+	"net/http"
 	"net/url"
 	"path"
 )
@@ -50,4 +52,22 @@ func JoinURLPath(base, endpoint string) (string, error) {
 	tmp := path.Join(baseURL.Path, endpoint)
 	baseURL.Path = tmp
 	return baseURL.String(), nil
+}
+
+// PostJSON : json形式のデータを指定したURLにPOSTする関数
+func PostJSON(posturl string, r io.Reader) ([]byte, error) {
+	/*
+		posturl: json形式のデータをポストするURL
+		r: json形式のデータ
+	*/
+	resp, err := http.Post(posturl, "application/json", r)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	return body, nil
 }
