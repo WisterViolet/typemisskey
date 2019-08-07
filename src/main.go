@@ -35,6 +35,7 @@ func newPostData(i, t string, v, l bool) *postData {
 }
 
 func main() {
+	fmt.Println("Start-up...")
 	var (
 		notes   []note
 		payload = newPostData("", "", false, false)
@@ -58,6 +59,7 @@ func main() {
 		notes[i], notes[j] = notes[j], notes[i]
 	})
 	index := 0
+	fmt.Println("Setup finished")
 	scheduler.Every(1).Hours().NotImmediately().Run(func() {
 		baseNote := notes[index]
 		payload.Text, err = typo.Generate(string(baseNote))
