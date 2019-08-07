@@ -6,3 +6,6 @@ WORKDIR /home
 
 USER gouser
 RUN mkdir src
+WORKDIR /home/src
+ADD execute.sh .
+ENTRYPOINT ["./execute.sh"]
