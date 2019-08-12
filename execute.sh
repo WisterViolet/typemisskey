@@ -1,4 +1,4 @@
 #! /bin/bash
-cd typemisskey/src
+cd src
 go build
 ./src
